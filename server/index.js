@@ -2,12 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const db=require('./config/mongoose');
 const https = require("https");
+const cors = require("cors");
 const app = express();
 const port=process.env.PORT || 5000;
 const MongoStore = require('connect-mongo');
 
 app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.json());
+app.use(cors());
 app.use(express.static('./assets'));
 app.set("view engine","ejs");
 app.set('views','./views');
