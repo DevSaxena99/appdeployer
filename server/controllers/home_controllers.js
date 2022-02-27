@@ -24,9 +24,9 @@ module.exports.createFavourite= async function(req,res){
 module.exports.editFavourite= async function(req,res){
 
   const id = req.body.id;
-  const comment = req.body.comment;
+  const cmt = req.body.comment;
 
-  Favourite.findByIdAndUpdate(id,{ $set:{comment:comment}},(err,prdct)=>{
+  Favourite.findByIdAndUpdate(id,{ $push:{comment:cmt}},(err,prdct)=>{
     if(err)
     {
        console.log(err);
