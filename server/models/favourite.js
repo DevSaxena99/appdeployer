@@ -14,6 +14,9 @@ const favouriteSchema= new mongoose.Schema({
         type:String,
         required:true
     },
+    rating:{
+        type:String,
+    },
     comment:[{
       type:String,
     }]

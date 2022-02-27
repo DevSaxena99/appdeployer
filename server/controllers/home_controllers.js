@@ -37,6 +37,21 @@ module.exports.editFavourite= async function(req,res){
 
 }
 
+module.exports.editRating= async function(req,res){
+  const id = req.body.id;
+  const cmt = req.body.rating;
+
+  Favourite.findByIdAndUpdate(id,{ $set:{rating:cmt}},(err,prdct)=>{
+    if(err)
+    {
+       console.log(err);
+    }
+    else
+    console.log("updated");
+  });
+
+}
+
 module.exports.deleteFavourite= async function(req,res){
 
   const id = req.body.id;
