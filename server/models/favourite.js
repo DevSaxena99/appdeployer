@@ -13,6 +13,9 @@ const favouriteSchema= new mongoose.Schema({
     description:{
         type:String,
         required:true
+    },
+    comment:{
+      type:String
     }
 },{
     timestamps:true
