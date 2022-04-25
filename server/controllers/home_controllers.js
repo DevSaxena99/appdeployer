@@ -1,61 +1,39 @@
-const Favourite=require('../models/favourite');
+const User1=require('../models/user1');
 const https = require("https");
 const http = require("http");
 
-module.exports.favourite=async function(req,res){
-  let recent_search= await Favourite.find({});
-    return  res.send(recent_search);
-}
+module.exports.createUser= async function(req,res){
 
-module.exports.createFavourite= async function(req,res){
-
-  const image = req.body.image;
   const name = req.body.name;
-  const desc = req.body.description;
+  const email = req.body.email;
+  const password = req.body.password;
 
-  Favourite.create({
-    image: image,
+  User1.create({
     name: name,
-    description: desc,
+    email: email,
+    password: password
   });
+
+  console.log("created");
 
 }
 
-module.exports.editFavourite= async function(req,res){
+module.exports.checkUser= async function(req,res){
 
-  const id = req.body.id;
-  const cmt = req.body.comment;
+  const email = req.body.email;
+  const password = req.body.password;
 
-  Favourite.findByIdAndUpdate(id,{ $push:{comment:cmt}},(err,prdct)=>{
-    if(err)
-    {
-       console.log(err);
+  User1.find({
+    email: email,
+  },function(err,user) {
+    if(err) {
+      console.log(err);
+    } else {
+      if(user[0].password===password){
+        console.log(user);
+        res.send(user);
+      }
     }
-    else
-    console.log("updated");
   });
-
-}
-
-module.exports.editRating= async function(req,res){
-  const id = req.body.id;
-  const cmt = req.body.rating;
-
-  Favourite.findByIdAndUpdate(id,{ $set:{rating:cmt}},(err,prdct)=>{
-    if(err)
-    {
-       console.log(err);
-    }
-    else
-    console.log("updated");
-  });
-
-}
-
-module.exports.deleteFavourite= async function(req,res){
-
-  const id = req.body.id;
-
-  await Favourite.deleteOne({ _id: id });
 
 }

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://dev_saxena_04:qwerty123@cluster0.ga09u.mongodb.net/favouriteDB');
+mongoose.connect('mongodb://127.0.0.1:27017/appDB');
 const db=mongoose.connection;
 //error
 db.on('error',console.error.bind(console,'error while connecting'));
